@@ -1,0 +1,25 @@
+{
+  "name": "01-middlewares",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-01": "./node_modules/jest/bin/jest.js ./tests/01-requestcount.spec.js",
+    "test-02": "./node_modules/jest/bin/jest.js ./tests/02-ratelimitter.spec.js",
+    "test-03": "./node_modules/jest/bin/jest.js ./tests/03-errorcount.spec.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.23.3",
+    "eslint-plugin-jest": "^27.6.0",
+    "ts-node": "^10.9.2"
+  }
+}
