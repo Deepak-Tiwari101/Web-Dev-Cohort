@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+  <input type="text" id="title" placeholder="Todo title"></input> <br /><br />
+  <input type="text" id="description" placeholder="Todo description"></input> <br /><br />
+  <button onclick="addTodo()">Add todo</button>
+  <br /> <br />
+
+  <div id="todos">
+
+  </div>
+    <script>
+    let globalId = 1;
+    let todoState = [];
+    let oldTodoState = [];
+
+    const todosDiv = document.getElementById('todos');
+
+    function addTodoToDom(todo) {
+      const newTodoElem = document.createElement('div');
+      newTodoElem.id = `todo-${todo.id}`;
+      newTodoElem.innerHTML = `
+        <h4>${todo.title}</h4>
+        <p>${todo.description}</p>
+      `;
+      todosDiv.appendChild(newTodoElem);
+    }
+
+    function removeTodoFromDom(todo) {
+      const todoToDelElem = document.getElementById(`todo-${todo.id}`);
+      if(todoToDelElem) todoToDelElem.remove();
+    }
+
+    function updateTodoInDom(oldTodo, newTodo) {
+      
+        const todoElem = document.getElementById(`todo-${todo.id}`);
+        if(todoElem) {
+          todoElem.innerHTML = `
+            <h4>${newTodo.title}</h4>
+            <p>${newTodo.description}</p>
+          `;
+        }
+    }
+
+    function updateState(newTodos) {
+      // calculate the diff b/w newTodos and oldTodos.
+      // More specifically, find out what todos are - 
+      // 1. added
+      // 2. deleted
+      // 3. updated
+      const added = [];
+      const deleted = [];
+      const updated = [];
+      // calculate these 3 arrays
+      // call addTodo, removeTodo, updateTodo functions on each of the
+      // elements
+      const oldTodosMap = new Map(oldTodoState.map(todo => [todo.id, todo]));
+      const newTodosMap = new Map(newTodos.map(todo => [todo.id, todo]));
+
+      // check for deleted and updated todos
+      oldTodoState.forEach(todo => {
+        if(!newTodosMap.has(todo.id)) deleted.push(todo);
+        else {
+          const foundTodo = newTodosMap.get(todo.id);
+          if(foundTodo.title !== todo.title || foundTodo.description !== todo.description) updated.push(todo);
+        }
+      });
+
+      //check for added todos
+      newTodos.forEach(todo => {
+        if(!oldTodosMap.has(todo.id)) added.push(todo);
+      });
+
+
+      // Call each functions with their repective arrays if required
+      if(deleted.length !== 0) {
+        deleted.forEach(todo => {
+          removeTodoFromDom(todo);
+        })
+      }
+      if(updated.length !== 0) {
+        updated.forEach(newTodo => {
+          const oldTodo = oldTodosMap.get(newTodo.id);
+          oldTodo && updateTodoInDom(oldTodo, newTodo);
+        })
+      }
+      if(added.length !== 0) {
+        added.forEach(todo => {
+          addTodoToDom(todo);
+        })
+      }
+      // create a deep copy of new todos to old todo state.
+      oldTodoState = JSON.parse(JSON.stringify(newTodos));
+    }
+
+
+
+    // business logic
+    function addTodo() {
+      const title = document.getElementById("title").value;
+      const description = document.getElementById("description").value;
+
+      // console.log("New title and description:", title, "-", description);
+
+      let isPresent = false;
+      todoState.some(todo => {
+        if(todo.title === title && todo.description === description)
+          isPresent = true;
+      })
+
+      if(isPresent) return; // early return as there is no need to add the same title and description
+
+      todoState.push({
+        title: title,
+        description: description,
+        id: globalId++,
+      })
+      updateState(todoState);
+    }
+  </script>
+</body>
+
+</html>
