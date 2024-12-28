@@ -1,0 +1,67 @@
+* {
+    --col-primary: rgb(59, 59, 255);
+    background-color: whitesmoke;
+}
+/* CardStyles.css */
+.container {
+    width: 20rem;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border: 0.5px solid rgba(128, 128, 128, 0.375);
+    box-shadow: 0px 10px 12px 5px rgba(0, 0, 0, 0.1);
+}
+.container * {
+    background-color: white;
+}
+h3, h4 {
+    margin: 0;
+}
+ul {
+    margin: 0.5rem 5px 1rem 5px;
+    padding-left: 0;
+}
+ul li {
+    list-style-type: none;
+}
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.handle-btn {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--col-primary);
+    color: white;
+    font-weight: 600;
+    height: 2rem;
+    width: 5rem;
+    padding: 2px 5px;
+    border-radius: 7px;
+    margin: 0.5rem;
+}
+.heading-div {
+    text-align: center;
+}
+.heading {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    position: relative;
+}
+.heading::after {
+    content: '';
+    display: block;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--col-primary), transparent);
+    width: 80%;
+    margin: 10px auto;
+}
+.main-div {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 5px;
+    width: 100%;
+}
