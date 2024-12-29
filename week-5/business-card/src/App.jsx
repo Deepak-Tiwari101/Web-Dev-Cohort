@@ -1,5 +1,6 @@
 import "./index.css"
 import Card from "./components/Card"
+import InputForm from "./components/InputForm"
 
 function App() {
 
@@ -9,46 +10,25 @@ function App() {
         <h1 className="heading">Create your Card 💳</h1>
       </header>
 
-      <div className="main-div">
-        <section>
-          <form>
-            <label>
-              Name:
-              <input type="text" placeholder="Name" />
-            </label>
-
-            <label>
-              Description:
-              <input type="text" placeholder="Description" />
-            </label>
-
-            <label>
-              Interest:
-              <input type="text" placeholder="Interest" />
-            </label>
-
-            <label>
-              Social Media:
-              <input type="text" placeholder="Social Media" />
-            </label>
-          </form>
-        </section>
-
-        <aside>
+      <div>
+        <div className="main-div">
+          <InputForm />
           <Card
             name={"Deepak"}
             description={"I am working for Ford IVI"}
             interestList={[
               { id: 1, value: "Badminton" },
               { id: 2, value: "Chess" },
-              { id: 3, value: "Video games" }
+              { id: 3, value: "Video games" },
             ]}
             socialMediaList={[
               { id: 1, url: "https://www.linkedin.com/", name: "LinkedIn" },
               { id: 2, url: "https://x.com/", name: "X (Twitter)" },
-            ]} />
-        </aside>
+            ]}
+          />
+        </div>
       </div>
+
     </div>
   )
 }

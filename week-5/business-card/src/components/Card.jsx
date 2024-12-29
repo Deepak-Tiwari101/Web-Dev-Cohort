@@ -4,10 +4,11 @@ import '../index.css'
 const Card = ({ name, description, interestList, socialMediaList }) => {
     return (
         <div className="container">
-            <h3>{name}</h3>
+
+            <h2>{name}</h2>
             <p>{description}</p>
 
-            {interestList && <h4>Interests</h4>}
+            {interestList && <h3>Interests</h3>}
             <ul>
                 {
                     interestList && Array.isArray(interestList) && interestList.map(interest => (
