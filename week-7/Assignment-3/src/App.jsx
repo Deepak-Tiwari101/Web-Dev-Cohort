@@ -1,17 +1,19 @@
-import { useRef, useState } from "react";
+// import { useState } from "react";
+import { useRef } from "react";
 import "./index.css";
 import { wordList } from "./words";
 
 const LENGTH = wordList.length;
 
 function App() {
-  const [sentence, setSentence] = useState([]);
+  // const [sentence, setSentence] = useState([]);
   const inputRef = useRef();
   const paraRef = useRef();
 
   const handleGenerate = (e) => {
     e.preventDefault();
-    setSentence([]);
+    // setSentence([]);
+    paraRef.current.innerText = "";
     const numWords = parseInt(inputRef.current.value) || 0;
 
     if (numWords <= 0) return alert("Sahi se value daal pehle");
@@ -20,7 +22,7 @@ function App() {
       const randomIndex = Math.floor(Math.random() * LENGTH)
       newSentence.push(wordList[randomIndex]);
     }
-    setSentence(newSentence);
+    // setSentence(newSentence);
 
     setTimeout(() => {
       const newSentenceString = newSentence.join(" ");
@@ -49,19 +51,19 @@ function App() {
 }
 
 // To increase performance we use the below Component
-const ChunkedParagraph = ({ words, chunkSize = 1000 }) => {
-  const chunks = [];
-  for (let i = 0; i < words.length; i += chunkSize) {
-    chunks.push(words.slice(i, i + chunkSize));
-  }
+// const ChunkedParagraph = ({ words, chunkSize = 1000 }) => {
+//   const chunks = [];
+//   for (let i = 0; i < words.length; i += chunkSize) {
+//     chunks.push(words.slice(i, i + chunkSize));
+//   }
 
-  return chunks.map((chunk, chunkIndex) => (
-    <p key={chunkIndex}>
-      {chunk.map((word, index) => (
-        <span key={`${chunkIndex}-${index}`}>{word} </span>
-      ))}
-    </p>
-  ));
-};
+//   return chunks.map((chunk, chunkIndex) => (
+//     <p key={chunkIndex}>
+//       {chunk.map((word, index) => (
+//         <span key={`${chunkIndex}-${index}`}>{word} </span>
+//       ))}
+//     </p>
+//   ));
+// };
 
 export default App
